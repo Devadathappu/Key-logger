@@ -1,0 +1,39 @@
+# #store keystrokes in a text file
+# f=open("log.txt", "w")  #write keystrokes to log.txt apart from w ,read(r), append (a)
+# f.write("iam devadath")
+# f.close()
+import pynput  # python library used to listen and control mouse and keyboard
+with open("log.txt", "a") as f:
+    f.write("\nhello")
+
+from pynput.mouse import Controller  # python library used to listen and control mouse and keyboard
+from pynput.keyboard import Controller
+def controlMouse():
+    mouse = Controller()
+    mouse.position=(200,200) #(left to right,top to bottom)
+def controlKeyboard():
+    keyboard = Controller()
+    keyboard.type("Iam devadath")
+controlKeyboard()
+
+cant use both controller at same time
+
+
+from pynput.keyboard import Listener
+
+def writetofile(key):
+    keydata=str(key)
+    with open("log.txt", "a") as f:
+        f.write(keydata)
+
+with Listener(on_press=writetofile) as l: # whenever a key is pressed on keyboard it calls on_press which call writetofile function
+    l.join()#joins all letters together and add single quote 
+
+from pynput.mouse import Listener  # Import Listener from pynput.mouse
+
+def writetofile(x, y):
+    print('Position of mouse: {}'.format((x, y)))  # Corrected print statement
+
+# Set up and start the listener for mouse movements
+with Listener(on_move=writetofile) as l:  # Listens for mouse movements
+    l.join()
